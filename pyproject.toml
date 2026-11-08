@@ -1,0 +1,28 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "open-agent-vault"
+version = "0.1.0"
+description = "Portable, connected Markdown memory for any agent, with optional Obsidian and MCP."
+readme = "README.md"
+requires-python = ">=3.11"
+license = "MIT"
+authors = [{name = "Nivaen Giritharan"}]
+dependencies = ["PyYAML>=6.0.2,<7", "filelock>=3.16,<4"]
+keywords = ["obsidian", "markdown", "knowledge-graph", "agent-memory", "mcp"]
+classifiers = ["Programming Language :: Python :: 3", "Operating System :: OS Independent"]
+
+[project.optional-dependencies]
+mcp = ["mcp>=2.3,<3"]
+
+[project.scripts]
+agent-vault = "agent_vault.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/fwnivaen/agent-vault"
+Issues = "https://github.com/fwnivaen/agent-vault/issues"
+
+[tool.setuptools.packages.find]
+where = ["src"]
