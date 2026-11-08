@@ -27,7 +27,7 @@ A fictional project for organizing a team's documentation.
 - [[decisions/markdown-first]]
 ```
 
-`id` stays with the note when a user moves it. Revisions are SHA-256 hashes of the complete file bytes; they change with any edit, including metadata. `type` chooses the default folder. Unknown metadata is preserved when the body is updated.
+`id` stays with the note when a user moves it. Revisions are SHA-256 hashes of the complete file bytes; they change with any edit, including metadata. `type` chooses the default folder. Unknown metadata is preserved when the body is updated. Logical note text normalizes Windows CRLF and classic CR line endings to LF; writes use LF, while revisions and recovery copies preserve the exact original bytes.
 
 `tags`, `sources` and `aliases`, when present, must be lists of strings. A source can be a URL, local document reference or other human-readable citation. Sources are not automatically fetched or validated. Metadata uses safe YAML loading; executable YAML tags are rejected.
 

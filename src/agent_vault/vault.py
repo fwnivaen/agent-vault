@@ -87,7 +87,7 @@ class Note:
     @property
     def title(self) -> str:
         heading = re.search(r"(?m)^#\s+(.+)$", self.body)
-        return str(self.metadata.get("title") or (heading[1] if heading else Path(self.path).stem))
+        return str(self.metadata.get("title") or (heading[1] if heading else Path(self.path).stem)).strip()
 
     def summary(self) -> dict:
         return {"path": self.path, "id": self.metadata.get("id"), "title": self.title,
@@ -98,7 +98,8 @@ class Note:
 def parse_note(path: str, raw: bytes) -> Note:
     if len(raw) > MAX_NOTE_BYTES:
         raise VaultError("Note exceeds 1 MB; split it into smaller linked notes")
-    text = raw.decode("utf-8-sig")
+    # Hash/history retain original bytes; logical Markdown uses portable LF lines.
+    text = raw.decode("utf-8-sig").replace("\r\n", "\n").replace("\r", "\n")
     metadata, body = {}, text
     if text.startswith("---\n") or text.startswith("---\r\n"):
         parts = re.split(r"(?m)^---\s*$", text, maxsplit=2)
@@ -123,7 +124,7 @@ def parse_note(path: str, raw: bytes) -> Note:
 
 def serialize(metadata: dict, body: str) -> bytes:
     result = ("---\n" + yaml.safe_dump(metadata, sort_keys=False, allow_unicode=True) +
-              "---\n\n" + body.rstrip() + "\n").encode("utf-8")
+              "---\n\n" + body + ("" if body.endswith("\n") else "\n")).encode("utf-8")
     if len(result) > MAX_NOTE_BYTES:
         raise VaultError("Note exceeds 1 MB")
     return result

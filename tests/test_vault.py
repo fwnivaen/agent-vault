@@ -106,6 +106,21 @@ class VaultTests(unittest.TestCase):
         self.assertCountEqual([x["reason"] for x in result["unresolved"]], ["ambiguous", "unresolved"])
         self.assertEqual(result["links"], 0)
 
+    def test_windows_line_endings_resolve_titles_and_preserve_logical_body(self):
+        file = self.root / "windows.md"
+        raw = b"---\r\ntitle: Windows topic\r\ncustom: keep\r\n---\r\n\r\n# Windows topic\r\nBody text\r\n\r\n"
+        file.write_bytes(raw)
+        self.put("reference.md", "# Reference\n[[Windows topic]]\n")
+        note = self.vault.read("windows.md")
+        self.assertNotIn("\r", note.body)
+        self.assertEqual(len(self.vault.graph()["edges"]), 1)
+        self.vault.classify(note.path, "topic", note.revision)
+        self.assertEqual(self.vault.read(note.path).body, note.body)
+        self.assertEqual((self.root / ".agent-vault/history" / (note.revision + ".md")).read_bytes(), raw)
+        self.put("plain.md", "# Plain title\nBody\n")
+        (self.root / "plain.md").write_bytes(b"# Plain title\r\nBody\r\n")
+        self.assertEqual(self.vault.read("plain.md").title, "Plain title")
+
     def test_existing_plain_markdown_and_external_edits_are_immediate(self):
         self.put("manual.md", "# Existing note\nOriginal text")
         self.assertEqual(self.vault.search("Original")["matches"][0]["path"], "manual.md")
