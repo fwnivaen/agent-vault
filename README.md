@@ -128,6 +128,8 @@ Each generated note has an ID, title, type, timestamps, tags and source referenc
 
 See the [note format](docs/note-format.md) and [command reference](docs/commands.md).
 
+For work that needs a review handoff, the [evidence-backed artifact recipe](docs/evidence-workflows.md) connects original sources, claim mapping, file hashes and check receipts using existing notes. A fictional example and unreviewed template make the review retrievable by another agent; source truth and artifact freshness still require the operator's checks.
+
 ## Editing and organization
 
 Read a note with `read PATH` and copy its `revision`. Use `update PATH --revision SHA --body-file body.md` to replace the body while retaining its metadata. A stale revision fails; the agent must read again and merge. The previous bytes are saved under `.agent-vault/history/`.

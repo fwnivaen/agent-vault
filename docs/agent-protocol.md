@@ -21,6 +21,8 @@ Give this protocol and the vault path to any agent with file/terminal access, or
 
 Keep the actual decision, current status, next action and unresolved questions in the relevant project/task notes, with sources. Agent B then retrieves those notes from the same directory; nothing depends on Agent A's chat history or model provider.
 
+For document, report or release reviews, use the [evidence-backed artifact recipe](evidence-workflows.md) to connect source versions, claim mapping, exact artifact hashes and observed check receipts. It includes an unreviewed template and fictional CLI example; storing a review does not verify its claims or grant approval.
+
 Agents may directly edit Markdown. Such edits bypass the CLI's lock and recovery history. Coordinate external editors/sync with active agent writes, and use ordinary backups for important vaults.
 
 ## Trust boundary
