@@ -23,6 +23,8 @@ Keep the actual decision, current status, next action and unresolved questions i
 
 For document, report or release reviews, use the [evidence-backed artifact recipe](evidence-workflows.md) to connect source versions, claim mapping, exact artifact hashes and observed check receipts. It includes an unreviewed template and fictional CLI example; storing a review does not verify its claims or grant approval.
 
+For a shared mutable resource, use the [single-operator workflow](single-operator-workflows.md) to record blocker scope, ownership, supported continuation and distinct resumption/result evidence. Its checkpoint template helps avoid reciprocal handoffs and repeated unchanged work; the vault does not execute or enforce that procedure.
+
 Agents may directly edit Markdown. Such edits bypass the CLI's lock and recovery history. Coordinate external editors/sync with active agent writes, and use ordinary backups for important vaults.
 
 ## Trust boundary

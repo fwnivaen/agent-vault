@@ -130,6 +130,8 @@ See the [note format](docs/note-format.md) and [command reference](docs/commands
 
 For work that needs a review handoff, the [evidence-backed artifact recipe](docs/evidence-workflows.md) connects original sources, claim mapping, file hashes and check receipts using existing notes. A fictional example and unreviewed template make the review retrievable by another agent; source truth and artifact freshness still require the operator's checks.
 
+The [single-operator workflow](docs/single-operator-workflows.md) records shared-resource ownership, scoped blockers and supported continuation without competing workers. It includes a retrievable checkpoint template and separates a verified repair from actual resumption and external success; no scheduler or locking service is implied.
+
 For recurring software upkeep, the [repository maintenance recipe](docs/repository-maintenance.md) records exact commits, CI coverage, external delivery evidence and the next owner in a linked checkpoint. It helps a later agent continue from verified results without treating an old alert, an unconfigured workflow or a billing receipt as current service health.
 
 ## Editing and organization
